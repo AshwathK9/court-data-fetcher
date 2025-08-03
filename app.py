@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from scraper import fetch_case_data
 import sqlite3
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 
@@ -31,4 +32,5 @@ def search():
         return render_template("index.html", error=str(e))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port, debug=True)
